@@ -38,7 +38,7 @@ def printar_vencedor(jogador,resultado_da_rodada):
             print(f"{i}, ", end=' ')
 
     # Printando numero de jogadas
-    print(f"\nNúmero de jogadas: {len(resultado_da_rodada)}")
+    print(f"\nNúmero de rodadas: {len(resultado_da_rodada)}")
 
     # Printando o tabuleiro do vencedor
     for i in jogador.cartela:
