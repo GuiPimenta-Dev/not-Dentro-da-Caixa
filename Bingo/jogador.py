@@ -11,10 +11,10 @@ class Jogador():
         self.nome = nome
         
         # Atributo tabuleiro - É criado pela funcao cria_Tabuleiro()
-        self.tabuleiro= self.cria_Tabuleiro()
+        self.cartela= self.cria_Tabuleiro()
         
         # Atributo tabuleiro_Comparacao - Matriz totalmente nula 4x4
-        self.tabuleiro_Comparacao = zeros((4, 4),dtype=int)
+        self.cartela_Comparacao = zeros((4, 4),dtype=int)
 
 
     # Funcao responsavel por criar um tabuleiro de Bingo para o jogador
@@ -46,10 +46,10 @@ class Jogador():
     def jogador_Fez_Bingo(self,resultado_Jogada,indice_linha,indice_coluna):
         
         # Adiciona o elemento na posicao original do tabuleiro do jogador no tabuleiro_Comparacao
-        self.tabuleiro_Comparacao[indice_linha][indice_coluna]=resultado_Jogada
+        self.cartela_Comparacao[indice_linha][indice_coluna]=resultado_Jogada
 
         # Se a linha do tabuleiro_Comparacao nao possuir zeros, entao:
-        if 0 not in self.tabuleiro_Comparacao[indice_linha]:
+        if 0 not in self.cartela_Comparacao[indice_linha]:
             # Retorna True - Jogador fez Bingo
             return True
 
