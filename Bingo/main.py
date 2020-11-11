@@ -2,6 +2,7 @@ from jogador import Jogador
 from random import randint
 import numpy as np
 import colorama
+from time import sleep
 
 
 # Reseta as cores para o padrao
@@ -25,7 +26,7 @@ def printar_vencedor(jogador,resultado_da_rodada):
     for i in resultado_da_rodada:
 
         # Se o elemento do resultado_da_rodada estiver presente no tabuleiro do vencedor, entao:
-        if i in jogador.tabuleiro:
+        if i in jogador.cartela:
 
             # Pinta os elementos que correspondem com o tabuleiro do vencedor com a cor VERDE
             print(colorama.Fore.GREEN + f"{i}, ", end=' ')
@@ -40,29 +41,42 @@ def printar_vencedor(jogador,resultado_da_rodada):
     print(f"\nNúmero de jogadas: {len(resultado_da_rodada)}")
 
     # Printando o tabuleiro do vencedor
-    for i in jogador.tabuleiro:
+    for i in jogador.cartela:
         print(i)
 
     # Printando o nome do vencedor em VERMELHO
-    print(colorama.Fore.RED + f"{jogador.nome} Bingo!!!\n")
+    print(colorama.Fore.RED + f"{jogador.nome} fez Bingo!!!\n")
 
 
 # Pergunta ao usuario quantos jogadores irao participar
 # numero_de_jogadores=int(input("Digite o numero de jogadores: "))
 
-numero_de_jogadores = 15
-# Instancia a classe Jogador de acordo com o numero escolhido pelo usuario e salva na lista jogadores
+# Numero de jogadores
+numero_de_jogadores = 25
+
+# Instancia a classe Jogador de acordo com o numero de jogadores escolhido pelo usuario e insere na lista jogadores
 jogadores = [Jogador(f"Jogador {i+1}") for i in range(numero_de_jogadores)]
 
+# Pergunta ao usuário o nome dele
+#nome_do_Jogador=input("Digite o seu nome: ")
+
+nome_do_Jogador = "Guilherme"
+# Instanciando usuário como Jogador
+usuario = Jogador(nome_do_Jogador)
+
+# Insere o usuário na lista jogadores
+jogadores.append(usuario)
 # Inicializa a lista dos resultados das jogadas vazia
 resultado_da_rodada=[]
 
 # Define vencedor igual a falso
 vencedor=False
 
-
+# Inicializa um contador para as rodadas
+rodada = 0
 # Enquanto o atributo vencedor da Classe Bingo for falso, faça algo:
 while vencedor==False:
+
 
     # Resultado recebe um valor aleatório entre 1 e 50
     resultado = randint(1, 50)
@@ -72,20 +86,44 @@ while vencedor==False:
         resultado = randint(1,50)
 
 
+    # Incrementa rodada em 1
+    rodada +=1
+
     # Salva na lista resultado_da_rodada
     resultado_da_rodada.append(resultado)
+
+    # Verifica se o resultado esta na cartela
+    if resultado in usuario.cartela:
+        
+        # Se o resultado estiver na cartela imprime em VERDE
+        print(f"\n{colorama.Fore.GREEN}Rodada {rodada}: {resultado}\n")
+    else:
+        
+        # Se o resultado nao estiver na cartela imprime em VERMELHO
+        print(f"\n{colorama.Fore.LIGHTRED_EX}Rodada {rodada}: {resultado}\n")
+
+    # Printa a cartela do usuario
+    for i in usuario.cartela:
+        print(i)
+
+
+    # Espera alguns segundos para a próxima rodada
+    sleep(2.5)
+
+    print("\n")
+
 
     # Para cada jogador na lista de jogadores, faça:
     for jogador in jogadores:
 
         # Se o resultado do Bingo estiver no tabuleiro do jogador, entao:
-        if resultado in jogador.tabuleiro:
+        if resultado in jogador.cartela:
 
             # indice_linha recebe o indice da linha do tabuleiro em que o resultado está
-            indice_linha=np.where(jogador.tabuleiro == resultado)[0][0]
+            indice_linha=np.where(jogador.cartela == resultado)[0][0]
             
             # indice_coluna recebe o indice da coluna do tabuleiro em que o resultado está
-            indice_coluna = np.where(jogador.tabuleiro == resultado)[1][0]
+            indice_coluna = np.where(jogador.cartela == resultado)[1][0]
 
 
             """"
@@ -100,7 +138,7 @@ while vencedor==False:
             """
             jogador_Fez_Bingo = jogador.jogador_Fez_Bingo(resultado,indice_linha,indice_coluna)
 
-        
+
         
             # Se jogador_Fez_Bingo é igual a True, entao:
             if jogador_Fez_Bingo:
