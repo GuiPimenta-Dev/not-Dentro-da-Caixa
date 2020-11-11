@@ -9,25 +9,30 @@ class Jogador():
         
         # Atributo nome
         self.nome = nome
-        
+
+        # Criando uma cartela 4x4
+        self.dimensao_Cartela = 4
+
         # Atributo tabuleiro - É criado pela funcao cria_Tabuleiro()
         self.cartela= self.cria_Tabuleiro()
         
-        # Atributo tabuleiro_Comparacao - Matriz totalmente nula 4x4
-        self.cartela_Comparacao = zeros((4, 4),dtype=int)
+        # Atributo tabuleiro_Comparacao - Matriz totalmente nula self.dimensao_Cartelaxself.dimensao_Cartela
+        self.cartela_Comparacao = zeros((self.dimensao_Cartela, self.dimensao_Cartela),dtype=int)
+
+
 
 
     # Funcao responsavel por criar um tabuleiro de Bingo para o jogador
     def cria_Tabuleiro(self):
         
-        # Matriz totalmente nula 4x4
-        tabuleiro_Jogador = zeros((4, 4),dtype=int)
+        # Matriz totalmente nula self.dimensao_Cartelaxself.dimensao_Cartela
+        tabuleiro_Jogador = zeros((self.dimensao_Cartela, self.dimensao_Cartela),dtype=int)
 
-        # Para cada linha de 0-4
-        for i in range(0, 4):
+        # Para cada linha de 0-self.dimensao_Cartela
+        for i in range(0, self.dimensao_Cartela):
             
-            # Para cada coluna de 0-4:
-            for j in range(0, 4):
+            # Para cada coluna de 0-self.dimensao_Cartela:
+            for j in range(0, self.dimensao_Cartela):
                 
                 # Gera um número aleatório entre 1 e 50
                 elemento_do_Tabuleiro = randint(1, 50)
