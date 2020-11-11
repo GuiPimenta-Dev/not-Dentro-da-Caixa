@@ -10,7 +10,7 @@ class Jogador():
         # Atributo nome
         self.nome = nome
 
-        # Criando uma cartela 4x4
+        # Definindo a dimensao da cartela como 4x4
         self.dimensao_Cartela = 4
 
         # Atributo cartela - É criado pela funcao cria_Cartela()
